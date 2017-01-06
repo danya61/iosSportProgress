@@ -37,7 +37,7 @@ class MenuTableView: UIViewController {
             nameLb.text = name
             self.avatarImage.image = UIImage(data: data!)
         }
-        
+        tableView.tableFooterView = UIView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ class MenuTableView: UIViewController {
 
 let cellMenuId : String = "Cell"
 
-let cellsNames = ["My Profile", "Comments", "Week Progress", "Week Body", "Search Users", "Login/Logout"]
+let cellsNames = ["My Profile", "Comments", "Week Progress", "Week Body", "Search Users"]
 
 extension MenuTableView : UITableViewDataSource, UITableViewDelegate {
     
@@ -93,8 +93,6 @@ extension MenuTableView : UITableViewDataSource, UITableViewDelegate {
             cell.imgCell.image = #imageLiteral(resourceName: "body")
         case 4:
             cell.imgCell.image = #imageLiteral(resourceName: "search")
-        case 5:
-            cell.imgCell.image = #imageLiteral(resourceName: "loginLogout")
         default:
             break
         }
@@ -109,6 +107,10 @@ extension MenuTableView : UITableViewDataSource, UITableViewDelegate {
             VC = (self.storyboard?.instantiateViewController(withIdentifier: "main") as? MainViewController)!
             NavVC = UINavigationController(rootViewController: VC)
             
+        }
+        if indexPath.row == 1 {
+            VC = (self.storyboard?.instantiateViewController(withIdentifier: "comments") as? CommentViewController)!
+            NavVC = UINavigationController(rootViewController: VC)
         }
         self.revealViewController().pushFrontViewController(NavVC, animated: true)
         //self.navigationController?.present(VC, animated: true, completion: nil)

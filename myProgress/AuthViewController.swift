@@ -50,7 +50,6 @@ class AuthViewController: UIViewController, VKDelegate {
             print("registry")
             
             let VC = self.storyboard?.instantiateViewController(withIdentifier: "main") as? MainViewController
-            //self.present(VC!, animated: true, completion: nil)
             self.navigationController?.pushViewController(VC!, animated: true)
         }
         
