@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyVK
 
 var authorized = false;
 var personImg = UIImage()
@@ -149,8 +150,7 @@ UIPopoverPresentationControllerDelegate{
 
     func logInPressed(){
         print("pressed \n")
-        let VC = self.storyboard?.instantiateViewController(withIdentifier: "auth") as? AuthViewController
-        self.navigationController?.pushViewController(VC!, animated: true)
+        VK.logOut()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

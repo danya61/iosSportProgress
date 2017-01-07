@@ -17,26 +17,41 @@ class MenuTableView: UIViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var isAuthorized : Bool?
-    var firstauth = false
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let defaults = UserDefaults.standard
-        if !firstauth {
-            isAuthorized = defaults.bool(forKey: "isAuthorized")
-            firstauth = true
-        }
-        if isAuthorized! {
-            if AvatarURL == "" {
-                AvatarURL = defaults.value(forKey: "Avatar") as? String
+            var nm : String?
+            
+            VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
+                onSuccess: {response in
+                    //print(response)
+                    self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
+                    print(self.AvatarURL!)
+                    DispatchQueue.main.async {
+                        //self.nameLb.text = "11111"
+                        let url = URL(string: self.AvatarURL!)
+                        let data = try? Data(contentsOf: url!)
+                        self.avatarImage.image = UIImage(data: data!)
+                    }
+
+            },
+                onError: {error in
+                    print(error)
+                    self.nameLb.text = "11111"
             }
-            let url = URL(string: AvatarURL!)
-            let data = try? Data(contentsOf: url!)
-            print("its OK data of URL \n")
-            let name = defaults.value(forKey: "Name") as? String
-            nameLb.text = name
-            self.avatarImage.image = UIImage(data: data!)
-        }
+            )
+            /*VK.API.Users.get([VK.Arg.fields: "photo_200_orig"]).send(
+                onSuccess : {response in
+                    nm = response[0, "first_name"].stringValue as? String
+                    self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
+            } ,
+                onError : {error in
+                    print("bad")
+                    print(error)}
+            ) */
+            
+            //print("its OK data of URL \n")
+            //nameLb.text = nm
         tableView.tableFooterView = UIView()
     }
     override func viewDidLoad() {

@@ -13,6 +13,7 @@
 		0454EB9A1DCA95EF0093F394 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0454EB991DCA95EF0093F394 /* Assets.xcassets */; };
 		0454EB9D1DCA95EF0093F394 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0454EB9B1DCA95EF0093F394 /* LaunchScreen.storyboard */; };
 		0459458F1DE5C67A00FC0E4B /* PopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459458E1DE5C67A00FC0E4B /* PopoverTableViewController.swift */; };
+		045A4F8C1E21081E00CAAE0E /* vkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A4F8B1E21081E00CAAE0E /* vkDelegate.swift */; };
 		047E3C7B1DCC6E2C00EB9A23 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E3C7A1DCC6E2C00EB9A23 /* MenuTableViewCell.swift */; };
 		047E3C7D1DCCA8B700EB9A23 /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E3C7C1DCCA8B700EB9A23 /* MenuTableView.swift */; };
 		047E3C851DCD3CFE00EB9A23 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E3C841DCD3CFD00EB9A23 /* MainCollectionViewCell.swift */; };
@@ -33,6 +34,7 @@
 		0454EB9C1DCA95EF0093F394 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0454EB9E1DCA95EF0093F394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0459458E1DE5C67A00FC0E4B /* PopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverTableViewController.swift; sourceTree = "<group>"; };
+		045A4F8B1E21081E00CAAE0E /* vkDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vkDelegate.swift; sourceTree = "<group>"; };
 		047E3C7A1DCC6E2C00EB9A23 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		047E3C7C1DCCA8B700EB9A23 /* MenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
 		047E3C841DCD3CFD00EB9A23 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				04860F6A1DCBAB3B00154007 /* SWRevealViewControllers */,
 				0454EB8F1DCA95EF0093F394 /* AppDelegate.swift */,
+				045A4F8B1E21081E00CAAE0E /* vkDelegate.swift */,
 				0454EB931DCA95EF0093F394 /* Main.storyboard */,
 				0454EB991DCA95EF0093F394 /* Assets.xcassets */,
 				0454EB9B1DCA95EF0093F394 /* LaunchScreen.storyboard */,
@@ -255,6 +258,7 @@
 				047E3C851DCD3CFE00EB9A23 /* MainCollectionViewCell.swift in Sources */,
 				0454EB901DCA95EF0093F394 /* AppDelegate.swift in Sources */,
 				0454EB981DCA95EF0093F394 /* myProgress.xcdatamodeld in Sources */,
+				045A4F8C1E21081E00CAAE0E /* vkDelegate.swift in Sources */,
 				04DBB02A1DD4761900857269 /* AuthViewController.swift in Sources */,
 				047E3C7B1DCC6E2C00EB9A23 /* MenuTableViewCell.swift in Sources */,
 				04860F6E1DCBAB6C00154007 /* SWRevealViewController.m in Sources */,

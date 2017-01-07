@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        vkDelegateReference = AuthViewController()
+        vkDelegateReference = vkDelegate()
         let settings = UIUserNotificationSettings(types: [.alert,.sound,.badge], categories: nil)
         application.registerUserNotificationSettings(settings)
         return true
