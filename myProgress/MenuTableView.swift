@@ -17,12 +17,19 @@ class MenuTableView: UIViewController {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-
+    var activityInd = UIActivityIndicatorView()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             var nm : String?
-            
-            VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
+        
+        activityInd.center = CGPoint(x: self.view.center.x * 3 / 4, y: self.view.center.y / 3)
+        activityInd.hidesWhenStopped = true
+        activityInd.color = UIColor.white
+        activityInd.activityIndicatorViewStyle = .whiteLarge
+        view.addSubview(activityInd)
+        activityInd.startAnimating()
+        VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
                 onSuccess: {response in
                     //print(response)
                     self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
@@ -32,6 +39,7 @@ class MenuTableView: UIViewController {
                         let url = URL(string: self.AvatarURL!)
                         let data = try? Data(contentsOf: url!)
                         self.avatarImage.image = UIImage(data: data!)
+                        self.activityInd.stopAnimating()
                     }
 
             },
