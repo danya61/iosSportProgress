@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import SwiftyVK
 
-var authorized = false;
+
 var personImg = UIImage()
 var lb = [NSManagedObject]()
 
@@ -57,7 +57,6 @@ UIPopoverPresentationControllerDelegate{
         let barButtonRight = UIBarButtonItem()
         barButtonRight.customView = but
         self.navigationItem.rightBarButtonItem = barButtonRight
-        //self.navigationItem.title = "Profile"
         navButton.setTitle("Profile ↓", for: .normal)
         
         picker.delegate = self
@@ -182,30 +181,22 @@ UIPopoverPresentationControllerDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSpacing = CGFloat(5) //Define the space between each cell
-        let leftRightMargin = CGFloat(10) //If defined in Interface Builder for "Section Insets"
-        //let numColumns = CGFloat(2) //The total number of columns you want
+        let cellSpacing = CGFloat(5)
+        let leftRightMargin = CGFloat(10)
         
         let totalCellSpace = cellSpacing
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
         let width = (screenWidth - leftRightMargin - totalCellSpace) * 3 / 4
-        let height =  screenHeight - collectionView.frame.height / 2 //whatever height you want
+        let height =  screenHeight - collectionView.frame.height / 2
         return CGSize(width: width, height: CGFloat(height))
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let defaults = UserDefaults.standard
-        authorized = defaults.bool(forKey: "isAuthorized")
-        if indexPath.row ==  lb.count  && authorized {
+        if indexPath.row ==  lb.count {
             let alert = UIAlertController(title: "Photo your Body!", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-            /*  let libButton = UIAlertAction(title: "Select photo from library", style: UIAlertActionStyle.default) { (alert: UIAlertAction!) -> Void in
-             self.picker.allowsEditing = false
-             self.picker.sourceType = .photoLibrary
-             self.picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-             self.present(self.picker, animated: true, completion: nil)
-             } */
+            
             let cameraButton = UIAlertAction(title: "Take a picture", style: UIAlertActionStyle.default) { (alert: UIAlertAction!) -> Void in
                 self.picker.allowsEditing = false
                 self.picker.sourceType = .camera

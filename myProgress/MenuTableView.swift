@@ -31,11 +31,11 @@ class MenuTableView: UIViewController {
         activityInd.startAnimating()
         VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
                 onSuccess: {response in
-                    //print(response)
+                    let nm : String = (response[0, "first_name"].stringValue as? String)!
                     self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
                     print(self.AvatarURL!)
                     DispatchQueue.main.async {
-                        //self.nameLb.text = "11111"
+                        self.nameLb.text = nm
                         let url = URL(string: self.AvatarURL!)
                         let data = try? Data(contentsOf: url!)
                         self.avatarImage.image = UIImage(data: data!)
@@ -48,18 +48,7 @@ class MenuTableView: UIViewController {
                     self.nameLb.text = "11111"
             }
             )
-            /*VK.API.Users.get([VK.Arg.fields: "photo_200_orig"]).send(
-                onSuccess : {response in
-                    nm = response[0, "first_name"].stringValue as? String
-                    self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
-            } ,
-                onError : {error in
-                    print("bad")
-                    print(error)}
-            ) */
-            
-            //print("its OK data of URL \n")
-            //nameLb.text = nm
+        
         tableView.tableFooterView = UIView()
     }
     override func viewDidLoad() {
@@ -71,7 +60,7 @@ class MenuTableView: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        avatarImage.layer.cornerRadius = avatarImage.frame.size.width / 15
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.width / 13
         avatarImage.contentMode = .scaleAspectFill
         avatarImage.layer.masksToBounds = false
     }
