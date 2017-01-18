@@ -18,7 +18,7 @@ let cellId = "cell"
 
 class MainViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate,
 UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate,
-UIPopoverPresentationControllerDelegate{
+UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBAction func unwindToMenu(segue: UIStoryboardSegue){
     }
@@ -149,7 +149,14 @@ UIPopoverPresentationControllerDelegate{
 
     func logInPressed(){
         print("pressed \n")
-        VK.logOut()
+        let defaults = UserDefaults.standard
+        authFB = defaults.bool(forKey: "login")
+        if !authFB {
+            VK.logOut()
+        }
+        else {
+
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -181,14 +188,12 @@ UIPopoverPresentationControllerDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSpacing = CGFloat(5)
-        let leftRightMargin = CGFloat(10)
         
-        let totalCellSpace = cellSpacing
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
-        let width = (screenWidth - leftRightMargin - totalCellSpace) * 3 / 4
-        let height =  screenHeight - collectionView.frame.height / 2
+        let width = screenWidth / 5 * 4
+        let height = screenHeight / 5 * 3
+        
         return CGSize(width: width, height: CGFloat(height))
     }
     
@@ -251,6 +256,10 @@ UIPopoverPresentationControllerDelegate{
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
+    
+   
+
+    
 }
 
 

@@ -8,7 +8,8 @@
 
 import UIKit
 import SwiftyVK
-
+import Firebase
+import FirebaseAuth
 
 class MenuTableView: UIViewController {
     
@@ -21,8 +22,8 @@ class MenuTableView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            var nm : String?
-        
+        print(" \n \n \n UID = \(FIRAuth.auth()?.currentUser?.uid) \n \n \n")
+        if !authFB{
         activityInd.center = CGPoint(x: self.view.center.x * 3 / 4, y: self.view.center.y / 3)
         activityInd.hidesWhenStopped = true
         activityInd.color = UIColor.white
@@ -48,7 +49,7 @@ class MenuTableView: UIViewController {
                     self.nameLb.text = "11111"
             }
             )
-        
+        }
         tableView.tableFooterView = UIView()
     }
     override func viewDidLoad() {

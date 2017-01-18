@@ -26,11 +26,8 @@ class vkDelegate : VKDelegate {
         if (VK.state == .authorized) {
             myPublicId = parameters["user_id"]!
             print("\n  did authorized      \(VK.state) \n")
-            
-            
-            
+
             let VC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rewealViewController") as? SWRevealViewController
-            let navVC = UINavigationController(rootViewController: VC!)
             UIApplication.shared.delegate?.window??.rootViewController =  VC
             
         }
