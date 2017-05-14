@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 import SwiftyVK
-
+import Firebase
+import FirebaseStorage
 
 var personImg = UIImage()
 var lb = [NSManagedObject]()
@@ -26,18 +27,22 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var navButton: UIButton!
     @IBOutlet weak var SWButton: UIBarButtonItem!
     let picker = UIImagePickerController()
-    
-    
+	
+		var photoURLs = [String]()
+		var localImages = [UIImage]()
+		var owner: Bool = true
+	
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        if self.revealViewController() != nil{
+        if self.revealViewController() != nil {
             SWButton.target  = self.revealViewController()
             SWButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         self.revealViewController().rearViewRevealWidth = 260
         
-        
+        print("owner = ", owner)
         
         ColView.delegate = self
         ColView.dataSource = self
@@ -60,11 +65,41 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
         navButton.setTitle("Profile ↓", for: .normal)
         
         picker.delegate = self
-        fetch()
+				if owner {
+					fetch()
+				} else {
+					fetchFromServer()
+				}
     }
     
-
-    
+	func fetchFromServer() {
+		print("serv from count")
+		for i in 0...photoURLs.count - 1 {
+			print("in cycle")
+			let url = URL(string: photoURLs[i])
+			print("url = ", url!)
+			DispatchQueue.global().async {
+				let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+				let image = UIImage(data: data!)
+				self.localImages.append(image!)
+				DispatchQueue.main.async {
+					self.ColView.reloadData()
+				}
+			}
+//			URLSession.shared.dataTask(with: url!)  { (data, response, error) in
+//				guard error != nil else {
+//					print("download error")
+//					return
+//				}
+//				let image = UIImage(data: data!)
+//				self.localImages.append(image!)
+//				self.ColView.reloadData()
+//				print("image append")
+//			}
+		}
+		
+	}
+		
     func fetch() {
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appdelegate.managedObjectContext
@@ -91,7 +126,6 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
                 print(indexPath.row)
                 let VC = self.storyboard?.instantiateViewController(withIdentifier: "fullPhoto") as? FullImageViewController
                 let indObj = lb[indexPath.row]
-                //VC?.image.contentMode = .scaleToFill
                 let curImg = UIImage(data: indObj.value(forKey: "image") as! Data, scale: 1.0)
                 VC?.img = curImg
                 self.present(VC!, animated: true, completion: nil)
@@ -127,6 +161,26 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         personImg = chosenImage
+				//---
+				var data = Data()
+				data = UIImageJPEGRepresentation(chosenImage, 0.8)!
+				let dateForm = DateFormatter()
+				let filepath = "\(FIRAuth.auth()!.currentUser!.uid)/\(UUID().uuidString)"
+				let metodata = FIRStorageMetadata()
+				metodata.contentType = "image/jpg"
+				FIRStorage.storage().reference().child(filepath).put(data, metadata: metodata) { (metadata, error) in
+					if error != nil {
+						print("error")
+						return
+					}
+					let downloadURL = metadata?.downloadURL()!.absoluteString
+					
+					let refBase = FIRDatabase.database().reference(fromURL: "https://bodyprogress-b3f15.firebaseio.com/")
+					let key = refBase.child("users").childByAutoId().key
+					refBase.child("photos").updateChildValues(["\(key)/photo": downloadURL!, "\(key)/owner": FIRAuth.auth()!.currentUser!.uid])
+					print("COMPLETED")
+				}
+				//---
         let defaults = UserDefaults.standard
         if !defaults.bool(forKey: "FirstIn") {
             print("FirstIn \n")
@@ -135,6 +189,7 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
         }
         
         dismiss(animated:true, completion: { () in
+					if self.owner {
             let curdate = Date()
             let dateForm = DateFormatter()
             dateForm.locale = Locale.current
@@ -143,37 +198,43 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
             let imgData = NSData(data: UIImageJPEGRepresentation(personImg, 1.0)!)
             self.saveCnt(newDate: newDate , imgData: imgData)
             self.ColView.reloadData()
+					}
         })
     }
     
 
-    func logInPressed(){
-        print("pressed \n")
-        let defaults = UserDefaults.standard
-        authFB = defaults.bool(forKey: "login")
-        if !authFB {
-            VK.logOut()
-        }
-        else {
-
-        }
-    }
+	func logInPressed(){
+			VK.logOut()
+			try! FIRAuth.auth()!.signOut()
+			segToAuth()
+			isAuth = false
+	}
+	
+	func segToAuth() {
+		let VC = self.storyboard?.instantiateViewController(withIdentifier: "auth") as! AuthViewController
+		self.present(VC, animated: true, completion: nil)
+	}
+	
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+			return 1
+	}
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       //  print("snova \n")
-        return lb.count + 1
-    }
+		if owner {
+			return lb.count + 1
+		} else {
+			return localImages.count
+		}
+	}
     
-    var cnt = 0
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cells = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MainCollectionViewCell
-        if indexPath.row != lb.count {
-            let indObj = lb[indexPath.row]
-            cells?.imgCell.contentMode = .scaleToFill
+	var cnt = 0
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+			let cells = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MainCollectionViewCell
+		if owner {
+			if indexPath.row != lb.count {
+					let indObj = lb[indexPath.row]
+					cells?.imgCell.contentMode = .scaleToFill
             let curImg = UIImage(data: indObj.value(forKey: "image") as! Data, scale: 1.0)
             cells?.layer.cornerRadius = 10
             cells?.imgCell.image = curImg
@@ -184,7 +245,13 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
             cells?.imgCell.image = #imageLiteral(resourceName: "camera")
             cells?.lblCell.text = "Photo Date"
         }
-        return cells!
+		} else {
+			cells?.imgCell.contentMode = .scaleToFill
+			cells?.layer.cornerRadius = 10
+			cells?.imgCell.image = localImages[indexPath.row]
+		}
+		
+		return cells!
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -196,10 +263,10 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: CGFloat(height))
     }
-    
+	
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row ==  lb.count {
+        if indexPath.row ==  lb.count && owner {
             let alert = UIAlertController(title: "Photo your Body!", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
             
             let cameraButton = UIAlertAction(title: "Take a picture", style: UIAlertActionStyle.default) { (alert: UIAlertAction!) -> Void in
@@ -242,7 +309,7 @@ UIPopoverPresentationControllerDelegate, UICollectionViewDelegateFlowLayout {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ppcs" {
-            if let testPPVC = segue.destination as? PopoverTableViewController {// as? PopoverTableViewController {
+            if let testPPVC = segue.destination as? PopoverTableViewController {
                 if let ppc = testPPVC.popoverPresentationController {
                     ppc.sourceRect = CGRect(x: navButton.bounds.size.width / 2, y: navButton.bounds.size.height / 2 + 12, width: 1, height: 1)
                     ppc.sourceView = navButton

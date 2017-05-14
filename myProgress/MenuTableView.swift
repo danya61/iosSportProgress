@@ -21,16 +21,17 @@ class MenuTableView: UIViewController {
     var activityInd = UIActivityIndicatorView()
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         print(" \n \n \n UID = \(FIRAuth.auth()?.currentUser?.uid) \n \n \n")
-        if !authFB{
-        activityInd.center = CGPoint(x: self.view.center.x * 3 / 4, y: self.view.center.y / 3)
-        activityInd.hidesWhenStopped = true
-        activityInd.color = UIColor.white
-        activityInd.activityIndicatorViewStyle = .whiteLarge
-        view.addSubview(activityInd)
-        activityInd.startAnimating()
-        VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
+        if !isAuth {
+					activityInd.center = CGPoint(x: self.view.center.x * 3 / 4, y: self.view.center.y / 3)
+					activityInd.hidesWhenStopped = true
+					activityInd.color = UIColor.white
+					activityInd.activityIndicatorViewStyle = .whiteLarge
+					view.addSubview(activityInd)
+					activityInd.startAnimating()
+					VK.API.Users.get([VK.Arg.ownerId : myPublicId, .fields : "photo_200_orig"]).send(
                 onSuccess: {response in
                     let nm : String = (response[0, "first_name"].stringValue as? String)!
                     self.AvatarURL = response[0, "photo_200_orig"].stringValue as? String
@@ -38,8 +39,8 @@ class MenuTableView: UIViewController {
                     DispatchQueue.main.async {
                         self.nameLb.text = nm
                         let url = URL(string: self.AvatarURL!)
-                        let data = try? Data(contentsOf: url!)
-                        self.avatarImage.image = UIImage(data: data!)
+                      //  let data = try? Data(contentsOf: url!)
+                        //self.avatarImage.image = UIImage(data: data!)
                         self.activityInd.stopAnimating()
                     }
 
@@ -117,17 +118,22 @@ extension MenuTableView : UITableViewDataSource, UITableViewDelegate {
         var VC = UIViewController()
         var NavVC = UINavigationController()
         if indexPath.row == 0 {
-            VC = (self.storyboard?.instantiateViewController(withIdentifier: "main") as? MainViewController)!
-            NavVC = UINavigationController(rootViewController: VC)
-            
+					VC = self.storyboard?.instantiateViewController(withIdentifier: "main") as! MainViewController
         }
         if indexPath.row == 1 {
-            VC = (self.storyboard?.instantiateViewController(withIdentifier: "comments") as? CommentViewController)!
-            NavVC = UINavigationController(rootViewController: VC)
+					VC = self.storyboard?.instantiateViewController(withIdentifier: "comments") as! CommentViewController
         }
-        self.revealViewController().pushFrontViewController(NavVC, animated: true)
-        //self.navigationController?.present(VC, animated: true, completion: nil)
-        
+				if indexPath.row == 2 {
+					VC = self.storyboard?.instantiateViewController(withIdentifier: "progressView") as! WeekProgressController
+				}
+				if indexPath.row == 3 {
+					VC = self.storyboard?.instantiateViewController(withIdentifier: "bodyView") as! WeekBodyViewController
+				}
+				if indexPath.row == 4 {
+					VC = self.storyboard?.instantiateViewController(withIdentifier: "search") as! SearchTableViewController
+				}
+				NavVC = UINavigationController(rootViewController: VC)
+				self.revealViewController().pushFrontViewController(NavVC, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

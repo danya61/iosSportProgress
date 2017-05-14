@@ -12,12 +12,12 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-var  authFB = false;
 
 class AuthViewController: UIViewController {
 
-    @IBOutlet weak var login: UITextField!
-    @IBOutlet weak var password: UITextField!
+	@IBOutlet weak var login: UITextField!
+	@IBOutlet weak var password: UITextField!
+	@IBOutlet weak var nickname: UITextField!
     
     let appID = "5774191"
     let scope : Set<VK.Scope> = [.photos, .offline, .email, .messages]
@@ -30,9 +30,8 @@ class AuthViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        let defaults = UserDefaults.standard
-        authFB = defaults.bool(forKey: "login")
-        if authFB {
+
+        if isAuth {
             segToMain()
         }
     }
@@ -52,9 +51,7 @@ class AuthViewController: UIViewController {
                     alert.addAction(actOK)
                     self.present(alert, animated: true, completion: nil)
                 } else {
-                    authFB = true
-                    let defaults = UserDefaults.standard
-                    defaults.setValue(true, forKey: "login")
+                    isAuth = true
                     self.segToMain()
                 }
             })
@@ -67,24 +64,22 @@ class AuthViewController: UIViewController {
             FIRAuth.auth()?.createUser(withEmail: login.text!, password: password.text!, completion: { (user, error) in
                 if error != nil {
                     print(error.debugDescription)
-                    var alert = UIAlertController(title: "OOOPS", message: "this e-mail already received", preferredStyle: .alert)
-                    var actOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+                    let alert = UIAlertController(title: "OOOPS", message: "this e-mail already received", preferredStyle: .alert)
+                    let actOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
                     alert.addAction(actOK)
                     self.present(alert, animated: true, completion: nil)
                 } else {
-                    authFB = true
+										isAuth = true
+									guard let uid = user?.uid else {
+										return
+									}
                     let ref = FIRDatabase.database().reference(fromURL: "https://bodyprogress-b3f15.firebaseio.com/")
-                    let userRef = ref.child("users")
-                    let values = ["email" : self.login.text]
+                    let userRef = ref.child("users").child(uid)
+									let values = ["email" : self.login.text, "nickname": self.nickname.text]
                     userRef.updateChildValues(values, withCompletionBlock: { (error,ref) in
-                        if error != nil {
-                            print("bad save")
-                        } else {
-                            
-                        }
-                        let defaults = UserDefaults.standard
-                        defaults.setValue(true, forKey: "login")
-                        self.segToMain()
+											guard error == nil else { return}
+											isAuth = true
+											self.segToMain()
                     })
                 }
             })

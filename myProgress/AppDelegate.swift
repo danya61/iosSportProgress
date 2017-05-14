@@ -12,6 +12,16 @@ import SwiftyVK
 import Firebase
 
 var vkDelegateReference : VKDelegate?
+
+var isAuth: Bool {
+	get {
+		return UserDefaults.standard.bool(forKey: "login")
+	}
+	set {
+		UserDefaults.standard.set(newValue, forKey: "login")
+		UserDefaults.standard.synchronize()
+	}
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -32,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         VK.process(url: url, sourceApplication: app)
         return true
     }
-    
     
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -126,5 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
-    }}
+    }
+}
 

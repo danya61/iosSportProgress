@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0413DB481EC8EA21006B54F5 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413DB471EC8EA21006B54F5 /* PhotoModel.swift */; };
 		045463461E2AA12900C26B74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045463451E2AA12900C26B74 /* GoogleService-Info.plist */; };
 		0454EB901DCA95EF0093F394 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454EB8F1DCA95EF0093F394 /* AppDelegate.swift */; };
 		0454EB951DCA95EF0093F394 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0454EB931DCA95EF0093F394 /* Main.storyboard */; };
@@ -22,11 +23,18 @@
 		04860F6E1DCBAB6C00154007 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04860F6D1DCBAB6C00154007 /* SWRevealViewController.m */; };
 		04860F701DCBB32A00154007 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860F6F1DCBB32A00154007 /* MainViewController.swift */; };
 		0498E04B1DD3B0FA00E9A6E1 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498E04A1DD3B0FA00E9A6E1 /* FullImageViewController.swift */; };
+		04A899FA1EC878B5000619AF /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A899F91EC878B5000619AF /* SearchTableViewController.swift */; };
+		04A899FD1EC88212000619AF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A899FC1EC88212000619AF /* UserModel.swift */; };
+		04D6DAE11E7D89D2009F4DF5 /* WeekProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6DAE01E7D89D2009F4DF5 /* WeekProgressTableViewCell.swift */; };
+		04D6DAE31E7D8C06009F4DF5 /* WeekProgressXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D6DAE21E7D8C06009F4DF5 /* WeekProgressXib.xib */; };
+		04D6DAE61E7DBD2D009F4DF5 /* WeekProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6DAE51E7DBD2D009F4DF5 /* WeekProgressController.swift */; };
+		04D6DB1A1E7EDAC4009F4DF5 /* WeekBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6DB191E7EDAC4009F4DF5 /* WeekBodyViewController.swift */; };
 		04DBB02A1DD4761900857269 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBB0291DD4761900857269 /* AuthViewController.swift */; };
 		46D5692404DCCAA456CEC5CB /* Pods_myProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AE087C930BCB468BB82F25 /* Pods_myProgress.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0413DB471EC8EA21006B54F5 /* PhotoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		045463451E2AA12900C26B74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0454EB8C1DCA95EF0093F394 /* myProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0454EB8F1DCA95EF0093F394 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +54,12 @@
 		04860F6D1DCBAB6C00154007 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
 		04860F6F1DCBB32A00154007 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		0498E04A1DD3B0FA00E9A6E1 /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
+		04A899F91EC878B5000619AF /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		04A899FC1EC88212000619AF /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		04D6DAE01E7D89D2009F4DF5 /* WeekProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekProgressTableViewCell.swift; sourceTree = "<group>"; };
+		04D6DAE21E7D8C06009F4DF5 /* WeekProgressXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeekProgressXib.xib; sourceTree = "<group>"; };
+		04D6DAE51E7DBD2D009F4DF5 /* WeekProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekProgressController.swift; sourceTree = "<group>"; };
+		04D6DB191E7EDAC4009F4DF5 /* WeekBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekBodyViewController.swift; sourceTree = "<group>"; };
 		04DBB0291DD4761900857269 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0D7AD18B88C5856DCECC4E2D /* Pods-myProgress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myProgress.release.xcconfig"; path = "Pods/Target Support Files/Pods-myProgress/Pods-myProgress.release.xcconfig"; sourceTree = "<group>"; };
 		72AE087C930BCB468BB82F25 /* Pods_myProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				04860F6A1DCBAB3B00154007 /* SWRevealViewControllers */,
+				04D6DAE41E7DBCE8009F4DF5 /* classes */,
+				04D6DADF1E7D8948009F4DF5 /* WeekProgressCell */,
 				0454EB8F1DCA95EF0093F394 /* AppDelegate.swift */,
 				045A4F8B1E21081E00CAAE0E /* vkDelegate.swift */,
 				0454EB931DCA95EF0093F394 /* Main.storyboard */,
@@ -94,14 +110,6 @@
 				0454EB9E1DCA95EF0093F394 /* Info.plist */,
 				045463451E2AA12900C26B74 /* GoogleService-Info.plist */,
 				0454EB961DCA95EF0093F394 /* myProgress.xcdatamodeld */,
-				04860F6F1DCBB32A00154007 /* MainViewController.swift */,
-				047E3C7C1DCCA8B700EB9A23 /* MenuTableView.swift */,
-				047E3C7A1DCC6E2C00EB9A23 /* MenuTableViewCell.swift */,
-				047E3C841DCD3CFD00EB9A23 /* MainCollectionViewCell.swift */,
-				0498E04A1DD3B0FA00E9A6E1 /* FullImageViewController.swift */,
-				04DBB0291DD4761900857269 /* AuthViewController.swift */,
-				0459458E1DE5C67A00FC0E4B /* PopoverTableViewController.swift */,
-				0484EF8B1E14E361001CBA04 /* CommentViewController.swift */,
 			);
 			path = myProgress;
 			sourceTree = "<group>";
@@ -114,6 +122,51 @@
 				04860F6B1DCBAB6C00154007 /* myProgress-Bridging-Header.h */,
 			);
 			name = SWRevealViewControllers;
+			sourceTree = "<group>";
+		};
+		04A899F81EC87894000619AF /* searchVC */ = {
+			isa = PBXGroup;
+			children = (
+				04A899F91EC878B5000619AF /* SearchTableViewController.swift */,
+			);
+			name = searchVC;
+			sourceTree = "<group>";
+		};
+		04A899FB1EC881EB000619AF /* models */ = {
+			isa = PBXGroup;
+			children = (
+				04A899FC1EC88212000619AF /* UserModel.swift */,
+				0413DB471EC8EA21006B54F5 /* PhotoModel.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		04D6DADF1E7D8948009F4DF5 /* WeekProgressCell */ = {
+			isa = PBXGroup;
+			children = (
+				04D6DAE01E7D89D2009F4DF5 /* WeekProgressTableViewCell.swift */,
+				04D6DAE21E7D8C06009F4DF5 /* WeekProgressXib.xib */,
+			);
+			name = WeekProgressCell;
+			sourceTree = "<group>";
+		};
+		04D6DAE41E7DBCE8009F4DF5 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				04A899FB1EC881EB000619AF /* models */,
+				04A899F81EC87894000619AF /* searchVC */,
+				0459458E1DE5C67A00FC0E4B /* PopoverTableViewController.swift */,
+				0484EF8B1E14E361001CBA04 /* CommentViewController.swift */,
+				04DBB0291DD4761900857269 /* AuthViewController.swift */,
+				0498E04A1DD3B0FA00E9A6E1 /* FullImageViewController.swift */,
+				047E3C841DCD3CFD00EB9A23 /* MainCollectionViewCell.swift */,
+				047E3C7A1DCC6E2C00EB9A23 /* MenuTableViewCell.swift */,
+				047E3C7C1DCCA8B700EB9A23 /* MenuTableView.swift */,
+				04860F6F1DCBB32A00154007 /* MainViewController.swift */,
+				04D6DAE51E7DBD2D009F4DF5 /* WeekProgressController.swift */,
+				04D6DB191E7EDAC4009F4DF5 /* WeekBodyViewController.swift */,
+			);
+			name = classes;
 			sourceTree = "<group>";
 		};
 		4057E7E9D127BDA494D7153D /* Frameworks */ = {
@@ -197,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D6DAE31E7D8C06009F4DF5 /* WeekProgressXib.xib in Resources */,
 				0454EB9D1DCA95EF0093F394 /* LaunchScreen.storyboard in Resources */,
 				045463461E2AA12900C26B74 /* GoogleService-Info.plist in Resources */,
 				0454EB9A1DCA95EF0093F394 /* Assets.xcassets in Resources */,
@@ -249,7 +303,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -259,10 +313,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0413DB481EC8EA21006B54F5 /* PhotoModel.swift in Sources */,
+				04D6DB1A1E7EDAC4009F4DF5 /* WeekBodyViewController.swift in Sources */,
 				047E3C851DCD3CFE00EB9A23 /* MainCollectionViewCell.swift in Sources */,
+				04D6DAE11E7D89D2009F4DF5 /* WeekProgressTableViewCell.swift in Sources */,
+				04D6DAE61E7DBD2D009F4DF5 /* WeekProgressController.swift in Sources */,
 				0454EB901DCA95EF0093F394 /* AppDelegate.swift in Sources */,
 				0454EB981DCA95EF0093F394 /* myProgress.xcdatamodeld in Sources */,
 				045A4F8C1E21081E00CAAE0E /* vkDelegate.swift in Sources */,
+				04A899FD1EC88212000619AF /* UserModel.swift in Sources */,
+				04A899FA1EC878B5000619AF /* SearchTableViewController.swift in Sources */,
 				04DBB02A1DD4761900857269 /* AuthViewController.swift in Sources */,
 				047E3C7B1DCC6E2C00EB9A23 /* MenuTableViewCell.swift in Sources */,
 				04860F6E1DCBAB6C00154007 /* SWRevealViewController.m in Sources */,
